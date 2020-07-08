@@ -3,12 +3,55 @@ using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Teste_Dti
 {
     public static class Calculos
     {
+        
+        public static int GetInt(string texto) 
+        {
+            string mensagemError = "Número invalido, por favor digite um número inteiro", input;
+            int valor = 0;
+
+            Console.Write(texto);
+            input = Console.ReadLine();
+            
+
+            if(int.TryParse(input, out valor))
+            {
+                return valor;
+            }
+            else 
+            {
+                Console.Clear();
+                Console.WriteLine(mensagemError);
+                return GetInt(texto);
+            }
+        }
+        public static string GetDate(string texto) 
+        {
+            string mensagemError = "Data invalida, por favor digite uma data correta no formato dd/mm/aaaa", input;
+            DateTime data;
+
+
+            Console.Write(texto);
+            input = Console.ReadLine();
+            
+
+            if(DateTime.TryParseExact(input,"dd/MM/yyyy", CultureInfo.InvariantCulture,DateTimeStyles.None, out data))
+            {
+                    return input;
+            }
+            else 
+            {
+                Console.Clear();
+                Console.WriteLine(mensagemError);
+                return GetDate(texto);
+            }
+        }
         public static void CalcPetShop()
         {
             //criando os petshops
@@ -18,25 +61,29 @@ namespace Teste_Dti
 
 
             //pegando valores do console
-            int qntCaesPequenos, qntCaesGrandes, diaDaSemana;
+            int qntCaesPequenos=0, qntCaesGrandes = 0, diaDaSemana;
             string dataString;
+            bool continuar;
+            
+            //verificação da data
+            dataString = GetDate("Digite a data que você deseja levar os cães ao petshop no formato dd/mm/aaaa: ");
 
-            Console.Write("Digite a data que você deseja levar os cães ao petshop: ");
-            dataString = (Console.ReadLine());
+            
+           
 
-            Console.Write("Digite a quantidade de cães de porte pequeno que deseja levar ao petshop: ");
-            qntCaesPequenos = int.Parse(Console.ReadLine());
+            //verificação do número de cachorros
+            qntCaesPequenos = GetInt("Digite a quantidade de cães de porte pequeno que deseja levar ao petshop: ");
+            qntCaesGrandes = GetInt("Digite a quantidade de cães de porte grande que deseja levar ao petshop: ");
 
-            Console.Write("Digite a quantidade de cães de porte grande que deseja levar ao petshop: ");
-            qntCaesGrandes = int.Parse(Console.ReadLine());
 
             //logica para pegar o dia da semana
             DateTime dateValue;
 
-            dateValue = DateTime.Parse(dataString, CultureInfo.InvariantCulture);
+            dateValue = DateTime.Parse(dataString);
             
             diaDaSemana = ((int)dateValue.DayOfWeek);
-
+            
+            //Console.Clear();
             //Calculando o total em cada petshop
             meuCaninoFeliz.PrecoFinal = meuCaninoFeliz.calcPrecoCaesPequenos(qntCaesPequenos, diaDaSemana)+ meuCaninoFeliz.calcPrecoCaesGrandes(qntCaesGrandes,diaDaSemana);
             vaiRex.PrecoFinal = vaiRex.calcPrecoCaesPequenos(qntCaesPequenos, diaDaSemana) + vaiRex.calcPrecoCaesGrandes(qntCaesGrandes, diaDaSemana);
@@ -60,8 +107,6 @@ namespace Teste_Dti
             }
 
             Console.WriteLine($"O canil com o melhor preço é o {petShopsArray[0].Nome} e o preço total dos banhos é de: {petShopsArray[0].PrecoFinal}");
-            Console.WriteLine($"O canil com o melhor preço é o {petShopsArray[1].Nome} e o preço total dos banhos é de: {petShopsArray[1].PrecoFinal}");
-            Console.WriteLine($"O canil com o melhor preço é o {petShopsArray[2].Nome} e o preço total dos banhos é de: {petShopsArray[2].PrecoFinal}");
         }
     }
 

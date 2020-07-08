@@ -40,7 +40,7 @@ namespace Teste_Dti
             }
             else
             {
-                precoFinalCaesGrandes = qntCaes * (valorAumentoFinalSemana + PrecoDiaSemanaCaesPequenos);
+                precoFinalCaesGrandes = qntCaes * (valorAumentoFinalSemana + PrecoDiaSemanaCaesGrandes);
             }
             return precoFinalCaesGrandes;
         }
