@@ -105,8 +105,8 @@ namespace Teste_Dti
                     }
                 }
             }
-
-            Console.WriteLine($"O canil com o melhor preço é o {petShopsArray[0].Nome} e o preço total dos banhos é de: {petShopsArray[0].PrecoFinal}");
+            
+            Console.WriteLine($"O canil com o melhor preço é o {petShopsArray[0].Nome} e o preço total dos banhos é de: {petShopsArray[0].PrecoFinal.ToString("C", CultureInfo.CurrentCulture)}");
         }
     }
 
