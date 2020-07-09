@@ -10,6 +10,11 @@ namespace Teste_Dti
 {
     public static class Calculos
     {
+        public static List<PetShop> ordenaList(List<PetShop> petShops)
+        {
+            petShops = petShops.OrderBy(p => p.PrecoFinal).ThenBy(p => p.Distancia).ToList();
+            return petShops;
+        }
         public static void CalcPetShop()
         {
             //criando os petshops
@@ -18,7 +23,7 @@ namespace Teste_Dti
             PetShop chowChawgas = new ChowChawgas("ChowChawgas", 800, 30.00, 45.00);
 
             //pegando valores do console
-            int qntCaesPequenos = 0, qntCaesGrandes = 0, diaDaSemana = 0;
+            int qntCaesPequenos = 0, qntCaesGrandes = 0;
             string input;
             DateTime data = new DateTime(0001,01,01);
             bool continuar;
@@ -50,7 +55,7 @@ namespace Teste_Dti
             chowChawgas.calcPrecoFinal(qntCaesPequenos,qntCaesGrandes,chowChawgas.PrecoDiaSemanaCaesPequenos,chowChawgas.PrecoDiaSemanaCaesGrandes,data);
 
             List<PetShop> petShopsList = new List<PetShop> { meuCaninoFeliz, chowChawgas, vaiRex };
-            petShopsList = petShopsList.OrderBy(p => p.PrecoFinal).ThenBy(p => p.Distancia).ToList();
+            petShopsList = ordenaList(petShopsList); 
             
             Console.WriteLine($"{petShopsList.First().Nome} {petShopsList.First().PrecoFinal.ToString("C")}");
         }

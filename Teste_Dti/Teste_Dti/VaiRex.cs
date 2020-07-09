@@ -21,7 +21,7 @@ namespace Teste_Dti
         {
             double preco;
             preco = qntCaes * precoDiaSemana;
-            //usar DayOfWeek.Saturday || DayOfWeek.Sunday 
+            
             if (diaDaSemana.DayOfWeek == DayOfWeek.Saturday || diaDaSemana.DayOfWeek == DayOfWeek.Sunday)
             { 
                preco = qntCaes * (ValorAumentoFinalSemana + precoDiaSemana);
