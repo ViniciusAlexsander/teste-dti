@@ -16,33 +16,22 @@ namespace Teste_Dti
         {
             this.valorAumentoFinalSemana = valorAumentoFinalSemana;
         }
-        public override double calcPrecoCaesPequenos(int qntCaes, int diaDaSemana)
-        {
-            double precoFinalCaesPequenos;
-            if (diaDaSemana >= 1 && diaDaSemana <= 5)
-            {
-                precoFinalCaesPequenos = qntCaes * PrecoDiaSemanaCaesPequenos;
-                
-            }
-            else
-            {
-                precoFinalCaesPequenos = qntCaes * (valorAumentoFinalSemana + PrecoDiaSemanaCaesPequenos);
-            }
-            return precoFinalCaesPequenos;
-        }
-        public override double calcPrecoCaesGrandes(int qntCaes, int diaDaSemana)
-        {
-            double precoFinalCaesGrandes;
-            if (diaDaSemana >= 1 && diaDaSemana <= 5)
-            {
-                precoFinalCaesGrandes = qntCaes * PrecoDiaSemanaCaesGrandes;
 
+        public override double calcPrecoCaes(int qntCaes, DateTime diaDaSemana, double precoDiaSemana)
+        {
+            double preco;
+            preco = qntCaes * precoDiaSemana;
+            //usar DayOfWeek.Saturday || DayOfWeek.Sunday 
+            if (diaDaSemana.DayOfWeek == DayOfWeek.Saturday || diaDaSemana.DayOfWeek == DayOfWeek.Sunday)
+            { 
+               preco = qntCaes * (ValorAumentoFinalSemana + precoDiaSemana);
             }
-            else
-            {
-                precoFinalCaesGrandes = qntCaes * (valorAumentoFinalSemana + PrecoDiaSemanaCaesGrandes);
-            }
-            return precoFinalCaesGrandes;
+            return preco;
+        }
+
+        public override void calcPrecoFinal(int qntCaesPequenos, int qntCaesGrandes, double precoCaesPequenos, double precoCaesGrandes, DateTime diaDaSemana)
+        {
+            PrecoFinal = calcPrecoCaes(qntCaesPequenos, diaDaSemana, precoCaesPequenos) + calcPrecoCaes(qntCaesGrandes, diaDaSemana, precoCaesGrandes);
         }
     }
 }

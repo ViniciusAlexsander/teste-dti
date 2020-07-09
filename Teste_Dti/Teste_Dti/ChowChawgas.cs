@@ -13,21 +13,19 @@ namespace Teste_Dti
         {
 
         }
-        public override double calcPrecoCaesPequenos(int qntCaes, int diaDaSemana)
+
+        public override double calcPrecoCaes(int qntCaes, DateTime diaDaSemana, double precoDiaSemana)
         {
-            double precoFinalCaesPequenos;
+            double preco;
 
-            precoFinalCaesPequenos = qntCaes * PrecoDiaSemanaCaesPequenos;
+            preco = qntCaes * precoDiaSemana;
 
-            return precoFinalCaesPequenos;
+            return preco;
         }
-        public override double calcPrecoCaesGrandes(int qntCaes, int diaDaSemana)
+
+        public override void calcPrecoFinal(int qntCaesPequenos, int qntCaesGrandes, double precoCaesPequenos, double precoCaesGrandes, DateTime diaDaSemana)
         {
-            double precoFinalCaesGrandes;
-
-            precoFinalCaesGrandes = qntCaes * PrecoDiaSemanaCaesGrandes;
-
-            return precoFinalCaesGrandes;
+            PrecoFinal = calcPrecoCaes(qntCaesPequenos, diaDaSemana, precoCaesPequenos) + calcPrecoCaes(qntCaesGrandes, diaDaSemana, precoCaesGrandes);
         }
     }
 }

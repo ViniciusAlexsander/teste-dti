@@ -30,7 +30,7 @@ namespace Teste_Dti
 
         }
 
-        public abstract double calcPrecoCaesPequenos(int qntCaes, int diaSemana);
-        public abstract double calcPrecoCaesGrandes(int qntCaes, int diaSemana);
+        public abstract double calcPrecoCaes(int qntCaes, DateTime diaSemana, double precoDiaSemana);
+        public abstract void calcPrecoFinal(int qntCaesPequenos, int qntCaesGrandes, double precoCaesPequenos, double precoCaesGrandes, DateTime diaDaSemana);
     }
 }
